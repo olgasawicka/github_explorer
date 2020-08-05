@@ -1,17 +1,19 @@
 import React from "react";
-import AppWrapper from "./AppStyled.js";
+import AppWrapper, { GlobalStyles } from "./AppStyled.js";
 import { Provider } from "react-redux";
 import store from "./store.js";
-import SearchUsers from "./components/SearchUsers.js";
+import Main from "./components/Main/Main";
 
 function App() {
   return (
-    <Provider store={store}>
-      <AppWrapper>
-        <h2>Github Explorer</h2>
-        <SearchUsers />
-      </AppWrapper>
-    </Provider>
+    <>
+      <GlobalStyles />
+      <Provider store={store}>
+        <AppWrapper>
+          <Main />
+        </AppWrapper>
+      </Provider>
+    </>
   );
 }
 
