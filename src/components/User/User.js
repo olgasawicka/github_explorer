@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { fetchUserRepos } from "../../actions/repos/reposActions";
-import UserRepos from "./UserRepos";
 import UserWrapper, { UserCard } from "./UserStyled";
+import { connect } from "react-redux";
+import { fetchUserRepos } from "../../redux/actions/repos/reposActions";
+import UserRepos from "./UserRepos";
+import ArrowIcon from "../common/ArrowIcon";
 
 const User = ({ users, fetchedData, fetchUserRepos }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -21,16 +22,23 @@ const User = ({ users, fetchedData, fetchUserRepos }) => {
       {users.map((user) => (
         <UserCard
           key={user.id}
-          onClick={() => onUserClick(user.id, user.repos_url)}
+          className={currentUser && currentUser === user.id ? "open" : null}
         >
-          <header>
-            {user.login}
-            <span
-              className={currentUser && currentUser === user.id ? "open arrow" : "arrow"}
-            />
+          <header
+            className="username"
+            onClick={() => onUserClick(user.id, user.repos_url)}
+          >
+            {user.name || user.login}
+            <i className="arrow">
+              <ArrowIcon />
+            </i>
           </header>
           {currentUser === user.id && (
-            <UserRepos user={user} fetchedData={fetchedData} />
+            <UserRepos
+              user={user}
+              fetchedData={fetchedData}
+              classname={currentUser && currentUser === user.id ? "open" : null}
+            />
           )}
         </UserCard>
       ))}

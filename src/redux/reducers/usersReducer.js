@@ -1,35 +1,35 @@
 import {
-  FETCH_USERS_REQUEST,
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE,
+  SEARCH_USERS_REQUEST,
+  SEARCH_USERS_SUCCESS,
+  SEARCH_USERS_FAILURE,
 } from "../actions/user/userActionTypes";
 
 const initialState = {
   loading: false,
-  users: [],
+  users: null,
   error: "",
 };
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_USERS_REQUEST:
+    case SEARCH_USERS_REQUEST:
       return {
         ...state,
         loading: true,
       };
 
-    case FETCH_USERS_SUCCESS:
+    case SEARCH_USERS_SUCCESS:
       return {
         ...state,
         loading: false,
         users: action.payload,
         error: "",
       };
-    case FETCH_USERS_FAILURE:
+    case SEARCH_USERS_FAILURE:
       return {
         ...state,
         loading: false,
-        users: [],
+        users: null,
         error: action.payload,
       };
     default:

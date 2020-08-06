@@ -1,25 +1,24 @@
 import React from "react";
-import { connect } from "react-redux";
-import { fetchUsers } from "../../actions/user/usersActions";
 import MainWrapper from "./MainStyled";
-import User from "../User/User";
+import { connect } from "react-redux";
+import { searchUsers } from "../../redux/actions/user/usersActions";
+import Spinner from "../common/Spinner";
 import Search from "../Search/Search";
+import User from "../User/User";
 
-const Main = ({ fetchedData, fetchUsers }) => {
-  const handleSearch = (searchUser) => fetchUsers(searchUser);
+const Main = ({ fetchedData, searchUsers }) => {
+  const { loading, users, error } = fetchedData;
+  const handleSearch = (searchUser) => searchUsers(searchUser);
 
   return (
     <MainWrapper>
-      <Search onSearch={handleSearch} loading={fetchedData.loading} />
-      {fetchedData.loading ? (
-        <p>Loading users ...</p>
-      ) : fetchedData.error ? (
-        <p>{fetchedData.error}</p>
+      <Search onSearch={handleSearch} loading={loading} />
+      {loading && <Spinner />}
+      {error && <p className="error-msg">{error}</p>}
+      {users && users.length ? (
+        <User users={users.slice(0, 5)} />
       ) : (
-        fetchedData.users &&
-        !!fetchedData.users.length && (
-          <User users={fetchedData.users.slice(0, 5)} />
-        )
+        users && !loading && <p className="no-users">No users</p>
       )}
     </MainWrapper>
   );
@@ -33,7 +32,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUsers: (username) => dispatch(fetchUsers(username)),
+    searchUsers: (username) => dispatch(searchUsers(username)),
   };
 };
 

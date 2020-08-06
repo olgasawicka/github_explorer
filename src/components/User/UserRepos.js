@@ -1,25 +1,32 @@
 import React from "react";
 import { UserReposWrapper } from "./UserStyled";
+import StarIcon from "../common/StarIcon";
+import Spinner from "../common/Spinner";
 
-const UserRepos = ({ fetchedData }) => {
+const UserRepos = ({ fetchedData, classname }) => {
   const { loading, repos, error } = fetchedData;
-  console.log(repos);
 
   return (
-    <UserReposWrapper>
-      {loading && <p>Loading repositories ...</p>}
-      {error && <p>{error}</p>}
+    <UserReposWrapper className={classname}>
+      {loading && <Spinner />}
+      {error && <p className="error-msg">{error}</p>}
       {repos.length
         ? repos.map((repo) => (
-            <li key={repo.id}>
-              <header>
+            <li key={repo.id} className="repo-card">
+              <header className="repo-title">
                 {repo.name}
-                <span>{repo.stargazers_count}</span>
+                <span>
+                  {repo.stargazers_count}
+                  <i>
+                    <StarIcon />
+                  </i>
+                </span>
               </header>
-              <div>{repo.description}</div>
+              <div className="repo-descr">{repo.description}</div>
             </li>
           ))
-        : !loading && <p className="no-repos">User has no repositories</p>}
+        : !loading &&
+          !error && <p className="no-repos">User has no repositories</p>}
     </UserReposWrapper>
   );
 };
