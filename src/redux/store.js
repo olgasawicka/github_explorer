@@ -1,7 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import usersReducer from "./reducers/usersReducer";
 import userReposReducer from "./reducers/userReposReducer";
-import logger from "redux-logger";
 import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
@@ -9,6 +8,6 @@ const rootReducer = combineReducers({
   userReposReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;
