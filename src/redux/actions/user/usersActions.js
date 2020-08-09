@@ -28,13 +28,16 @@ export const searchUsersFailure = (error) => {
 export const searchUsers = (username) => {
   return function (dispatch) {
     dispatch(searchUsersRequest());
-    axios
-      .get(`https://api.github.com/search/users?q=${username}`)
+    return axios
+      .get("https://api.github.com/search/users", {
+        params: {
+          q: username,
+        },
+      })
       .then((response) => {
         const usersLogin = response.data.items
           .slice(0, 5)
           .map((user) => user.login);
-
         const userURLs = usersLogin.map((login) =>
           axios.get(`https://api.github.com/users/${login}`)
         );

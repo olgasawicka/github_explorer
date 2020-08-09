@@ -36,7 +36,7 @@ describe("My Connected React-Redux Component", () => {
   });
 
   it("It should dispatch SEARCH_USERS_REQUEST on first call", async () => {
-    store.dispatch(searchUsers());
+    store.dispatch(searchUsers("username"));
 
     const actions = store.getActions();
     const expectedPayload = { type: "SEARCH_USERS_REQUEST" };
