@@ -16,7 +16,7 @@ const Spinner = styled.div`
   border-radius: 50%;
   width: 2rem;
   height: 2rem;
-  margin: 1rem 0;
+  margin: 1rem auto;
   animation: ${rotate360} 1s linear infinite;
 `;
 

@@ -22,4 +22,5 @@ Button.defaultProps = {
   onClick: () => {},
   disabled: false,
 };
+
 export default Button;

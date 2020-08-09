@@ -26,7 +26,11 @@ const UserRepos = ({ fetchedData, classname }) => {
             </li>
           ))
         : !loading &&
-          !error && <p className="no-repos">User has no repositories</p>}
+          !error && (
+            <p className="no-repos" data-testid="no-repos">
+              User has no repositories
+            </p>
+          )}
     </UserReposWrapper>
   );
 };

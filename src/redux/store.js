@@ -5,8 +5,8 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
-  users: usersReducer,
-  repos: userReposReducer,
+  usersReducer,
+  userReposReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));

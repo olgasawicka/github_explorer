@@ -4,13 +4,13 @@ import {
   SEARCH_USERS_FAILURE,
 } from "../actions/user/userActionTypes";
 
-const initialState = {
+export const userInitialState = {
   loading: false,
   users: null,
   error: "",
 };
 
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = userInitialState, action) => {
   switch (action.type) {
     case SEARCH_USERS_REQUEST:
       return {

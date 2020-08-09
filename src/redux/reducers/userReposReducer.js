@@ -4,19 +4,19 @@ import {
   FETCH_USER_REPOS_FAILURE,
 } from "../actions/repos/reposActionTypes";
 
-const initialState = {
+export const reposInitialState = {
   loading: false,
   repos: [],
   error: "",
 };
 
-const userReposReducer = (state = initialState, action) => {
+const userReposReducer = (state = reposInitialState, action) => {
   switch (action.type) {
     case FETCH_USER_REPOS_REQUEST:
       return {
         ...state,
         loading: true,
-        repos: []
+        repos: [],
       };
 
     case FETCH_USER_REPOS_SUCCESS:

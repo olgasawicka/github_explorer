@@ -26,7 +26,7 @@ const Main = ({ fetchedData, searchUsers }) => {
 
 const mapStateToProps = (state) => {
   return {
-    fetchedData: state.users,
+    fetchedData: state.usersReducer,
   };
 };
 

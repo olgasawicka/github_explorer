@@ -5,7 +5,7 @@ import { fetchUserRepos } from "../../redux/actions/repos/reposActions";
 import UserRepos from "./UserRepos";
 import ArrowIcon from "../common/ArrowIcon";
 
-const User = ({ users, fetchedData, fetchUserRepos }) => {
+export const User = ({ users, fetchedData, fetchUserRepos }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
   const onUserClick = (userId, repoURL) => {
@@ -19,12 +19,13 @@ const User = ({ users, fetchedData, fetchUserRepos }) => {
 
   return (
     <UserWrapper>
-      {users.map((user) => (
+      {users && users.map((user) => (
         <UserCard
           key={user.id}
           className={currentUser && currentUser === user.id ? "open" : null}
         >
           <header
+          data-testid="user-name"
             className="username"
             onClick={() => onUserClick(user.id, user.repos_url)}
           >
@@ -48,7 +49,7 @@ const User = ({ users, fetchedData, fetchUserRepos }) => {
 
 const mapStateToProps = (state) => {
   return {
-    fetchedData: state.repos,
+    fetchedData: state.userReposReducer,
   };
 };
 
